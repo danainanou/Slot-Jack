@@ -1,44 +1,46 @@
 body {
-  background-color: darkgreen;
+  background-color: #fafafa;
   text-align: center;
   margin: 0 auto;
 }
 
 .container {
-  width: 650px;
-  height: 350px;
-  border: 2px solid grey;
+  width: 600px;
   margin: 0 auto;
+  background: white;
 }
 
 .card {
-  border: 2px solid grey;
-  width: 120px;
-  height: 200px;
-  display: inline-block;
+  box-sizing: border-box;
+  border: 2px solid black;
+  width: 160px;
+  height: 260px;
   float: left;
-  margin: 30px;
+  margin: 20px;
+}
+
+.fixed {
+  border: 2px solid yellow;
 }
 
 .fix {
-  width: 100px;
-  height: 20px;
-  margin-left: 50px;
-}
-
-.two {
-  margin-left: 83px;
-}
-
-.three {
-  margin-left: 83px;
-}
-
-.first {
-  margin-left: 40px;
+  box-sizing: border-box;
+  border: 2px solid black;
+  width: 160px;
+  height: 40px;
+  line-height: 40px;
+  float: left;
+  background: yellow;
+  margin: 0 20px;
 }
 
 .roll {
   display: inline-block;
-
+  line-height: 40px;
+  background: red;
+  width: 560px;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 20px;
+  overflow: hidden;
 }

@@ -17,6 +17,7 @@
 // A for loop should work wonders in this case.
 // Make those values appear in the html with txt and possibly string interpolation.
 // When the player wants to fix a value a class of 'fixed' will be added to the column they want to fix.
+// Clicking the button again removes the fixed class.
 // If the column has a class of fixed && the player has rolls left they will be able to roll again.
 // Not sure at this point how to restrict the player and AI to having 3 rolls each. Maybe a conditional statement?
 // Render the roll and fix buttons inactive and remove 'fixed' class from columns when AI is rolling.
@@ -26,5 +27,37 @@
 // else if player 1 score > 21 return loss, else tie.
 // If player 1 || AI roll 3 Aces then it is a win else Aces = 11 points.
 
-// const $player1 = '';
-// const $ai = '';
+const cardValues = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
+let $cards;
+
+// Function to run when the document has loaded
+$(init);
+
+// Initial function that sets up the game
+function init() {
+  // Setup event listeners
+  $('.roll').on('click', roll);
+  $('.fix').on('click', fix);
+}
+
+function roll() {
+  // Select all of the cards that have the class of '.card' but NOT the class
+  // of '.fixed'
+  $cards = $('.card:not(.fixed)');
+  // Loop through them and...
+  for (let i = 0; i < $cards.length; i++) {
+    // Pick a random card value from the list of card values
+    var random = cardValues[Math.floor(Math.random() * cardValues.length)];
+    // Add it to the html of that specific card by fetching it out of the
+    // array of card
+    $($cards[i]).html(random);
+  }
+}
+
+function fix() {
+  // Find the corresponding card using the 'data-card' value that we added on
+  // each of the fix buttons
+  const $card = $(`.${$(this).data('card')}`);
+  // Toggle (swithc) the class of fixed on and off
+  $card.toggleClass('fixed');
+}

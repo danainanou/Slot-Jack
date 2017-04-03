@@ -1,3 +1,44 @@
 body {
-  background-color: hotpink;
+  background-color: darkgreen;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.container {
+  width: 650px;
+  height: 350px;
+  border: 2px solid grey;
+  margin: 0 auto;
+}
+
+.card {
+  border: 2px solid grey;
+  width: 120px;
+  height: 200px;
+  display: inline-block;
+  float: left;
+  margin: 30px;
+}
+
+.fix {
+  width: 100px;
+  height: 20px;
+  margin-left: 50px;
+}
+
+.two {
+  margin-left: 83px;
+}
+
+.three {
+  margin-left: 83px;
+}
+
+.first {
+  margin-left: 40px;
+}
+
+.roll {
+  display: inline-block;
+
 }

@@ -13,7 +13,7 @@
 //
 // Player, AI and cards/card values need to be assigned with an array or object literate.
 // Connect values with cards.
-// Assign onclick button to loop through the three arrays and randomly choose 3 values. Iterval of 2 seconds.
+// Assign onclick button to loop through the three arrays and randomly choose 3 values.
 // A for loop should work wonders in this case.
 // Make those values appear in the html with txt and possibly string interpolation.
 // When the player wants to fix a value a class of 'fixed' will be added to the column they want to fix.
@@ -29,6 +29,9 @@
 
 const cardValues = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 let $cards;
+let count = 0;
+const player1 = '';
+// const ai = '';
 
 // Function to run when the document has loaded
 $(init);
@@ -37,6 +40,7 @@ $(init);
 function init() {
   // Setup event listeners
   $('.roll').on('click', roll);
+  $('.roll').on('click', counter);
   $('.fix').on('click', fix);
 }
 
@@ -58,6 +62,69 @@ function fix() {
   // Find the corresponding card using the 'data-card' value that we added on
   // each of the fix buttons
   const $card = $(`.${$(this).data('card')}`);
-  // Toggle (swithc) the class of fixed on and off
+  // Toggle (switch) the class of fixed on and off
   $card.toggleClass('fixed');
 }
+
+function ai() {
+  $('.card').removeClass('fixed');
+  $('.roll').off;
+  $('.fix').off;
+  
+}
+
+function counter() {
+  count++;
+  if (count % 4 === 0) {
+    alert('Player 2\'s turn now!');
+    ai();
+  }
+}
+// var cardValues = [
+//   { name: 'A', image: 'ace_of_spades.png'},
+//   { name: 'K', image: 'king_of_spades.png'},
+//   { name: 'Q', image: 'queen_of_spades.png'},
+//   { name: 'J', image: 'jack_of_spades.png'},
+//   { name: '10', image: '10_of_spades.png'},
+//   { name: '9', image: '9_of_spades.png'},
+//   { name: '8', image: '8_of_spades.png'},
+//   { name: '7', image: '7_of_spades.png'},
+//   { name: '6', image: '6_of_spades.png'},
+//   { name: '5', image: '5_of_spades.png'},
+//   { name: '4', image: '4_of_spades.png'},
+//   { name: '3', image: '3_of_spades.png'},
+//   { name: '2', image: '2_of_spades.png'}
+// ];
+// + '<img src=''+cardValues.image+''>'
+//
+// ace = new Image();
+// ace.src = 'ace_of_spades.png';
+// king = new Image();
+// king.src = 'king_of_spades.png';
+// queen = new Image();
+// queen.src = 'queen_of_spades.png';
+// jack = new Image();
+// jack.src = 'jack_of_spades.png';
+// ten = new Image();
+// ten.src = 'ten_of_spades.png';
+// nine = new Image();
+// nine.src = 'nine_of_spades.png';
+// eight = new Image();
+// eight.src = 'eight_of_spades.png';
+// seven = new Image();
+// seven.src = 'seven_of_spades.png';
+// six = new Image();
+// six.src = 'six_of_spades.png';
+// five = new Image();
+// five.src = 'five_of_spades.png';
+// four = new Image();
+// four.src = 'four_of_spades.png';
+// three = new Image();
+// three.src = 'three_of_spades.png';
+// two = new Image();
+// two.src = 'two_of_spades.png';
+//
+// const cardValues = {
+//   'A' : ace,
+//   'K' : king,
+// 'Q' : queen, 'J' : jack, 10 : ten, 9 : nine, 8 : eight, 7 : seven, 6 : six, 5 : five, 4 : four, 3 : three, 2 : two}

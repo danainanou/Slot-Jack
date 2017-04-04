@@ -37,6 +37,8 @@ let $rolls;
 let $playerScore;
 let $dealerScore;
 let $message;
+let $rollButton;
+let $fixButtons;
 
 // Function to run when the document has loaded
 $(init);
@@ -49,22 +51,32 @@ function init() {
   $playerScore = $('.playerScore');
   $dealerScore = $('.dealerScore');
   $message     = $('.message');
+  $rollButton  = $('.roll');
+  $fixButtons  = $('.fix');
 
   // Setup event listeners
-  $('.roll').on('click', roll);
-  $('.fix').on('click', fix);
+  $rollButton.on('click', roll);
+  $fixButtons.on('click', fix);
 }
 
 function reset() {
-  numberOfRolls = 3;
-  $playerScore.text('0');
-  $dealerScore.text('0');
-  $rolls.text(numberOfRolls);
-  $message.html('<h2>Start playing!</h2>');
-  $cards
-  .removeClass('fixed')
-  .css('background-image', 'none')
-  .attr('data-image', '');
+  $rollButton.hide();
+  $fixButtons.hide();
+
+  setTimeout(() => {
+    numberOfRolls = 3;
+    $playerScore.text('0');
+    $dealerScore.text('0');
+    $rolls.text(numberOfRolls);
+    $message.html('<h2>Start playing!</h2>');
+    $cards
+    .removeClass('fixed')
+    .css('background-image', 'none')
+    .attr('data-image', '');
+
+    $rollButton.show();
+    $fixButtons.show();
+  }, 5000);
 }
 
 function roll() {
@@ -108,15 +120,21 @@ function fix() {
 }
 
 function ai() {
-  // Remove the fixed classes from the cards
-  // and remove the background-image
-  // remove data-attribute
-  $cards
-  .removeClass('fixed')
-  .css('background-image', 'none')
-  .attr('data-image', '');
+  $rollButton.hide();
+  $fixButtons.hide();
+  $message.html(`<h2>You got ${$playerScore.text()}. Dealer is dealing...</h2>`);
 
-  roll();
+  setTimeout(() => {
+    // Remove the fixed classes from the cards
+    // and remove the background-image
+    // remove data-attribute
+    $cards
+    .removeClass('fixed')
+    .css('background-image', 'none')
+    .attr('data-image', '');
+
+    roll();
+  }, 3000);
 }
 
 function counter() {
@@ -126,11 +144,7 @@ function counter() {
   $rolls.text(numberOfRolls);
   // If there are no more rolls left...
   if (numberOfRolls === 0) {
-    if ($playerScore.text() > 21) {
-      reset();
-    } else {
-      ai();
-    }
+    ai();
   }
 }
 
@@ -178,12 +192,14 @@ function calculateScore() {
 
 function calculateWinner() {
   // Display the correct message
-  if ($dealerScore.text() > 21) {
-    $message.html('<h2>Player wins!</h2>');
-  } else if ($playerScore.text() >= $dealerScore.text()) {
-    $message.html('<h2>Player wins!</h2>');
-  } else {
+  if ($playerScore.text() > 21) {
+    $message.html('<h2>You\'re bust! House wins!</h2>');
+  } else if ($dealerScore.text() > 21) {
+    $message.html('<h2>Dealer is bust! Player wins!</h2>');
+  } else if ($dealerScore.text() >= $playerScore.text()) {
     $message.html('<h2>House wins!</h2>');
+  } else {
+    $message.html('<h2>Player wins!</h2>');
   }
   // Reset the game
   reset();
@@ -194,8 +210,8 @@ function makeDeck() {
   const deck = [];
   //
   for (let i = 0; i < values.length; i++) {
-    for (let i = 0; i < suits.length; i++) {
-      deck.push(`${values[i]}_of_${suits[i]}`);
+    for (let j = 0; j < suits.length; j++) {
+      deck.push(`${values[i]}_of_${suits[j]}`);
     }
   }
   return deck;

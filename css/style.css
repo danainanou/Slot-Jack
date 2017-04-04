@@ -8,6 +8,7 @@ body {
   width: 870px;
   margin: 0 auto;
   background: white;
+  overflow: hidden;
 }
 
 .card {

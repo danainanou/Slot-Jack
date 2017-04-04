@@ -11,12 +11,15 @@ body {
 }
 
 .card {
+  background-size: 252px 365px;
+  background-position: -2px;
   box-sizing: border-box;
   border: 2px solid black;
   width: 250px;
   height: 363px;
   float: left;
   margin: 20px;
+  border-radius: 13px;
 }
 
 .fixed {

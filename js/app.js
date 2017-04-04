@@ -27,33 +27,75 @@
 // else if player 1 score > 21 return loss, else tie.
 // If player 1 || AI roll 3 Aces then it is a win else Aces = 11 points.
 
-const cardValues = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
+const values      = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
+const suits       = ['hearts', 'diamonds', 'spades', 'clubs'];
+const deck        = makeDeck();
+let numberOfRolls = 3;
 let $cards;
-let count = 0;
-const player1 = '';
+let $cardsToRoll;
+let $rolls;
+let $playerScore;
+let $dealerScore;
+let $message;
 
 // Function to run when the document has loaded
 $(init);
 
 // Initial function that sets up the game
 function init() {
+  // Find all of the relevant things from the DOM;
+  $rolls       = $('.rolls');
+  $cards       = $('.card'); // Cards container
+  $playerScore = $('.playerScore');
+  $dealerScore = $('.dealerScore');
+  $message     = $('.message');
+
   // Setup event listeners
   $('.roll').on('click', roll);
-  $('.roll').on('click', counter);
   $('.fix').on('click', fix);
+}
+
+function reset() {
+  numberOfRolls = 3;
+  $playerScore.text('0');
+  $dealerScore.text('0');
+  $rolls.text(numberOfRolls);
+  $message.html('<h2>Start playing!</h2>');
+  $cards
+  .removeClass('fixed')
+  .css('background-image', 'none')
+  .attr('data-image', '');
 }
 
 function roll() {
   // Select all of the cards that have the class of '.card' but NOT the class
   // of '.fixed'
-  $cards = $('.card:not(.fixed)');
+  $cardsToRoll = $('.card:not(.fixed)');
   // Loop through them and...
-  for (let i = 0; i < $cards.length; i++) {
-    // Pick a random card value from the list of card values
-    var random = cardValues[Math.floor(Math.random() * cardValues.length)];
-    // Add it to the html of that specific card by fetching it out of the
-    // array of card
-    $($cards[i]).html(random);
+  for (let i = 0; i < $cardsToRoll.length; i++) {
+    // Pick a random card value from the deck
+    var random = deck[Math.floor(Math.random() * deck.length)];
+    // Update the background-image of that specific card by fetching it out of the
+    // array of cards and converting to a jQuery object so that we can use the
+    // .css() method
+    const $card = $($cardsToRoll[i]);
+    // Set a data-attribute to remember the image
+    $card.attr('data-image', random);
+    // Update the background
+    $card.css('background-image', `url('images/${random}.png')`);
+  }
+
+  // Calculate the score of all of the visible cards
+  const score = calculateScore();
+
+  // If there are 0 rolls left, this must mean that computer is playing
+  if (numberOfRolls === 0) {
+    $dealerScore.text(score);
+    calculateWinner();
+  } else {
+    $playerScore.text(score);
+    // Increment the counter
+    counter();
   }
 }
 
@@ -66,62 +108,95 @@ function fix() {
 }
 
 function ai() {
-  $('.card').removeClass('fixed');
-  $('.roll').off;
-  $('.fix').off;
+  // Remove the fixed classes from the cards
+  // and remove the background-image
+  // remove data-attribute
+  $cards
+  .removeClass('fixed')
+  .css('background-image', 'none')
+  .attr('data-image', '');
+
   roll();
 }
 
 function counter() {
-  count++;
-  if (count % 4 === 0) {
-    alert('Your score is . Player 2\'s turn now!');
-    ai();
+  // Decrease the number of rolls
+  numberOfRolls--;
+  // Update the text in the DOM
+  $rolls.text(numberOfRolls);
+  // If there are no more rolls left...
+  if (numberOfRolls === 0) {
+    if ($playerScore.text() > 21) {
+      reset();
+    } else {
+      ai();
+    }
   }
 }
-// var cardValues = [
-//   { name: 'A', image: 'ace_of_spades.png'},
-//   { name: 'K', image: 'king_of_spades.png'},
-//   { name: 'Q', image: 'queen_of_spades.png'},
-//   { name: 'J', image: 'jack_of_spades.png'},
-//   { name: '10', image: '10_of_spades.png'},
-//   { name: '9', image: '9_of_spades.png'},
-//   { name: '8', image: '8_of_spades.png'},
-//   { name: '7', image: '7_of_spades.png'},
-//   { name: '6', image: '6_of_spades.png'},
-//   { name: '5', image: '5_of_spades.png'},
-//   { name: '4', image: '4_of_spades.png'},
-//   { name: '3', image: '3_of_spades.png'},
-//   { name: '2', image: '2_of_spades.png'}
-// ];
-// + '<img src=''+cardValues.image+''>'
-//
-// ace = new Image();
-// ace.src = 'ace_of_spades.png';
-// king = new Image();
-// king.src = 'king_of_spades.png';
-// queen = new Image();
-// queen.src = 'queen_of_spades.png';
-// jack = new Image();
-// jack.src = 'jack_of_spades.png';
-// ten = new Image();
-// ten.src = 'ten_of_spades.png';
-// nine = new Image();
-// nine.src = 'nine_of_spades.png';
-// eight = new Image();
-// eight.src = 'eight_of_spades.png';
-// seven = new Image();
-// seven.src = 'seven_of_spades.png';
-// six = new Image();
-// six.src = 'six_of_spades.png';
-// five = new Image();
-// five.src = 'five_of_spades.png';
-// four = new Image();
-// four.src = 'four_of_spades.png';
-// three = new Image();
-// three.src = 'three_of_spades.png';
-// two = new Image();
-// two.src = 'two_of_spades.png';
-//
-//    const cardValues = {
-//   'A' : ace,'K' : king, 'Q' : queen, 'J' : jack, 10 : ten, 9 : nine, 8 : eight, 7 : seven, 6 : six, 5 : five, //    4 : four, 3 : three, 2 : two};
+
+function calculateScore() {
+  // Either computer or player...
+  let score = 0;
+  // Loop through all of the cards displayed
+  for (let i = 0; i < $cards.length; i++) {
+    // Get the card's background image
+    const image = $($cards[i]).attr('data-image');
+    // Try to get the value from the first number of the card
+    // e.g. '10_of_hearts.png' => 10
+    const value = parseInt(image);
+    // If the value is not a numner, it means it has to be
+    // ace, jack, queen or king
+    if (isNaN(value)) {
+      // Split the name where there is _
+      // e.g. king_of_spades => ['king', 'of', 'spades']
+      // Then take the first index
+      const name = image.split('_')[0];
+      switch (name) {
+        case 'jack':
+          score += 10;
+          break;
+        case 'queen':
+          score += 10;
+          break;
+        case 'king':
+          score += 10;
+          break;
+        case 'ace':
+          if ((score + 11) > 21) {
+            score += 1;
+          } else {
+            score += 11;
+          }
+          break;
+      }
+    } else {
+      score += value;
+    }
+  }
+  return score;
+}
+
+function calculateWinner() {
+  // Display the correct message
+  if ($dealerScore.text() > 21) {
+    $message.html('<h2>Player wins!</h2>');
+  } else if ($playerScore.text() >= $dealerScore.text()) {
+    $message.html('<h2>Player wins!</h2>');
+  } else {
+    $message.html('<h2>House wins!</h2>');
+  }
+  // Reset the game
+  reset();
+}
+
+function makeDeck() {
+  // Create an empty array
+  const deck = [];
+  //
+  for (let i = 0; i < values.length; i++) {
+    for (let i = 0; i < suits.length; i++) {
+      deck.push(`${values[i]}_of_${suits[i]}`);
+    }
+  }
+  return deck;
+}

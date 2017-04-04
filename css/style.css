@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-  width: 600px;
+  width: 870px;
   margin: 0 auto;
   background: white;
 }
@@ -13,8 +13,8 @@ body {
 .card {
   box-sizing: border-box;
   border: 2px solid black;
-  width: 160px;
-  height: 260px;
+  width: 250px;
+  height: 363px;
   float: left;
   margin: 20px;
 }
@@ -26,7 +26,7 @@ body {
 .fix {
   box-sizing: border-box;
   border: 2px solid black;
-  width: 160px;
+  width: 250px;
   height: 40px;
   line-height: 40px;
   float: left;
@@ -38,7 +38,7 @@ body {
   display: inline-block;
   line-height: 40px;
   background: red;
-  width: 560px;
+  width: 830px;
   box-sizing: border-box;
   border: 2px solid black;
   margin: 20px;

@@ -27,11 +27,10 @@
 // else if player 1 score > 21 return loss, else tie.
 // If player 1 || AI roll 3 Aces then it is a win else Aces = 11 points.
 
-const cardValues = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
+const cardValues = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 let $cards;
 let count = 0;
 const player1 = '';
-// const ai = '';
 
 // Function to run when the document has loaded
 $(init);
@@ -70,13 +69,13 @@ function ai() {
   $('.card').removeClass('fixed');
   $('.roll').off;
   $('.fix').off;
-  
+  roll();
 }
 
 function counter() {
   count++;
   if (count % 4 === 0) {
-    alert('Player 2\'s turn now!');
+    alert('Your score is . Player 2\'s turn now!');
     ai();
   }
 }
@@ -124,7 +123,5 @@ function counter() {
 // two = new Image();
 // two.src = 'two_of_spades.png';
 //
-// const cardValues = {
-//   'A' : ace,
-//   'K' : king,
-// 'Q' : queen, 'J' : jack, 10 : ten, 9 : nine, 8 : eight, 7 : seven, 6 : six, 5 : five, 4 : four, 3 : three, 2 : two}
+//    const cardValues = {
+//   'A' : ace,'K' : king, 'Q' : queen, 'J' : jack, 10 : ten, 9 : nine, 8 : eight, 7 : seven, 6 : six, 5 : five, //    4 : four, 3 : three, 2 : two};

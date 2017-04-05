@@ -3,7 +3,7 @@
 // One player against AI. There is a grid with 3 columns, 3 'fix' buttons and a roll button.
 // When the roll button is clicked the 3 columns cycle through an array of 52 cards each.
 // The cards are each worth as many points as it is written on them apart from
-// K, Q, J that are worth 10 points and Aces worth 11.
+// K, Q, J that are worth 10 points and Aces worth 11 or 1 point.
 // The goal of the game is for the player to gather a score of 21 points and to not exceed that.
 // 3 Aces win automatically. (3 Aces of Spades trigger extra bonus?)
 // Both player and AI have 3 rounds to achieve that.
@@ -24,8 +24,7 @@
 // If the player has rolled 3 times then it's the AI's turn.
 // Then the score is calculated and a winner is decided.
 // If player 1 score = 21 && > AI score then P1 wins, else if AI score = 21 && > P1 score, AI wins.
-// else if player 1 score > 21 return loss, else tie.
-// If player 1 || AI roll 3 Aces then it is a win else Aces = 11 points.
+// else if player 1 score > 21 return loss.
 
 const values      = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 const suits       = ['hearts', 'diamonds', 'spades', 'clubs'];
@@ -85,30 +84,49 @@ function roll() {
   $cardsToRoll = $('.card:not(.fixed)');
   // Loop through them and...
   for (let i = 0; i < $cardsToRoll.length; i++) {
-    // Pick a random card value from the deck
-    var random = deck[Math.floor(Math.random() * deck.length)];
-    // Update the background-image of that specific card by fetching it out of the
-    // array of cards and converting to a jQuery object so that we can use the
-    // .css() method
-    const $card = $($cardsToRoll[i]);
-    // Set a data-attribute to remember the image
-    $card.attr('data-image', random);
-    // Update the background
-    $card.css('background-image', `url('images/${random}.png')`);
+
+    // Create a recurring setInterval to change the background of the cards
+    // every 50 milliseconds
+    const cardAnimationInterval = setInterval(() => {
+      const random = deck[Math.floor(Math.random() * deck.length)];
+      const $card = $($cardsToRoll[i]);
+      $card.css('background-image', `url('images/${random}.png')`);
+    }, 50);
+
+    // Create a setTimeout to run after 1 second
+    setTimeout(() => {
+      // Stop the previous interval from running...
+      clearInterval(cardAnimationInterval);
+
+      // Pick a random card value from the deck
+      const random = deck[Math.floor(Math.random() * deck.length)];
+      // Update the background-image of that specific card by fetching it out of the
+      // array of cards and converting to a jQuery object so that we can use the
+      // .css() method
+      const $card = $($cardsToRoll[i]);
+      // Set a data-attribute to remember the image
+      $card.attr('data-image', random);
+      // Update the background
+      $card.css('background-image', `url('images/${random}.png')`);
+    }, 1000);
   }
 
-  // Calculate the score of all of the visible cards
-  const score = calculateScore();
+  // Needs to be in a setTimout or else this code will run BEFORE the
+  // previous setTimeout finishes
+  setTimeout(() => {
+    // Calculate the score of all of the visible cards
+    const score = calculateScore();
 
-  // If there are 0 rolls left, this must mean that computer is playing
-  if (numberOfRolls === 0) {
-    $dealerScore.text(score);
-    calculateWinner();
-  } else {
-    $playerScore.text(score);
-    // Increment the counter
-    counter();
-  }
+    // If there are 0 rolls left, this must mean that computer is playing
+    if (numberOfRolls === 0) {
+      $dealerScore.text(score);
+      calculateWinner();
+    } else {
+      $playerScore.text(score);
+      // Increment the counter
+      counter();
+    }
+  }, 1100);
 }
 
 function fix() {

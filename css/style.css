@@ -2,12 +2,21 @@ body {
   background: url(../images/bg.jpg) #503228;
   text-align: center;
   margin: 0 auto;
+  font-family: 'Special Elite', cursive;
+}
+
+h1 {
+  font-family: 'Bevan', cursive;
+  font-weight: bold;
+  font-size: 70px;
+  color: #FF0000;
+  text-shadow: 2px 2px #A29243;
 }
 
 .container {
   width: 870px;
   margin: 0 auto;
-  background: #01574D;
+  background: #0B261D;
   overflow: hidden;
 }
 
@@ -15,7 +24,7 @@ body {
   background-size: 252px 365px;
   background-position: -2px;
   box-sizing: border-box;
-  border: 2px solid black;
+  border: 2px solid #fff;
   width: 250px;
   height: 363px;
   float: left;
@@ -24,31 +33,108 @@ body {
 }
 
 .fixed {
-  border: 2px solid yellow;
+  border: 4px solid #A29243;
 }
 
 .fix {
   box-sizing: border-box;
-  border: 2px solid black;
+  border: 2px solid #520000;
   width: 250px;
   height: 40px;
   line-height: 40px;
   float: left;
-  background: yellow;
+  background: #A29243;
   margin: 0 20px;
+  color: #520000;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .roll {
   display: inline-block;
   line-height: 40px;
-  background: red;
+  background: #000;
+  color: #A29243;
   width: 830px;
   box-sizing: border-box;
-  border: 2px solid black;
+  border: 2px solid #A29243;
   margin: 20px;
   overflow: hidden;
+  font-size: 23px;
 }
 
 .controls {
   font-size: 20px;
+  width: 870px;
+  margin: 0 auto;
+  color: #A29243;
+}
+
+.rollsContainer {
+  display: inline;
+  width: 200px;
+  float: left;
+  padding-bottom: 20px;
+}
+
+.playerScoreContainer {
+  display: inline;
+  width: 200px;
+  float: left;
+  padding-bottom: 20px;
+}
+
+.dealerScoreContainer {
+  display: inline;
+  width: 200px;
+  float: left;
+  padding-bottom: 20px;
+}
+
+.pot {
+  display: inline;
+  width: 200px;
+  float: left;
+  padding-bottom: 20px;
+}
+
+.submit {
+  width: 400px;
+  height: 50px;
+  background: linear-gradient(
+      #172E26, #2F3E39
+    );
+  color: #520000;
+  font-size: 20px;
+  font-weight: bold;
+  border: 1px solid #520000;
+}
+
+.submit:hover {
+  color: #727600;
+  border: 1px solid #727600;
+}
+
+.message {
+  color: #EF0F0F;
+  font-weight: bold;
+  font-size: 27px;
+}
+
+#ac-wrapper {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(52,50,52,0.8);
+z-index: 1001;
+color: #A29243;
+}
+#popup{
+width: 870px;
+height: 590px;
+background: rgba(170, 151, 149, 0.3);
+border: 5px solid #A29243;
+font-size: 22px;
 }

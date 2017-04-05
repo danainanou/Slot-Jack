@@ -1,5 +1,5 @@
 body {
-  background-color: #fafafa;
+  background: url(../images/bg.jpg) #503228;
   text-align: center;
   margin: 0 auto;
 }
@@ -7,7 +7,7 @@ body {
 .container {
   width: 870px;
   margin: 0 auto;
-  background: white;
+  background: #01574D;
   overflow: hidden;
 }
 
@@ -47,4 +47,8 @@ body {
   border: 2px solid black;
   margin: 20px;
   overflow: hidden;
+}
+
+.controls {
+  font-size: 20px;
 }

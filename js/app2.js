@@ -52,7 +52,7 @@ sj.roll = function roll() {
       const random = sj.deck[Math.floor(Math.random() * sj.deck.length)];
       const $card = $(sj.$cardsToRoll[i]);
       $card.css('background-image', `url('images/${random}.png')`);
-      var audio = new Audio('./sounds/shuffle.wav');
+      const audio = new Audio('./sounds/shuffle.wav');
       audio.play();
     }, 50);
 
@@ -92,7 +92,7 @@ window.onload = function() {
 sj.howToSJ = function howToSJ(hideOrshow) {
   if (hideOrshow === 'hide') document.getElementById('howtoplay').style.display = 'none';
   else document.getElementById('howtoplay').removeAttribute('style');
-  var audio = new Audio('./sounds/howtopopup.wav');
+  const audio = new Audio('./sounds/howtopopup.wav');
   audio.play();
 };
 
@@ -119,7 +119,7 @@ sj.reset = function reset() {
 sj.fix = function fix() {
   const $card = $(`.${$(this).data('card')}`);
   $card.toggleClass('fixed');
-  var audio = new Audio('./sounds/fix.wav');
+  const audio = new Audio('./sounds/fix.wav');
   audio.play();
 };
 

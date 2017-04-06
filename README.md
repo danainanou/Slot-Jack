@@ -1,27 +1,51 @@
-# wdi-project-1
-First WDI Project (London)
 
-Slot Jack (Black Jack meets Slot machines)
-One player against AI. There is a grid with 3 columns, 3 'fix' buttons and a roll button.
-When the roll button is clicked the 3 columns cycle through an array of 52 cards each.
-The cards are each worth as many points as it is written on them apart from
-K, Q, J that are worth 10 points and Aces worth 11 or 1 point.
-The goal of the game is for the player to gather a score of 21 points and to not exceed that.
-3 Aces win automatically. (3 Aces of Spades trigger extra bonus?)
-The player has 3 rounds to achieve that.
-Once the player rolls, he has the option to fix a column in order to hold that option for the second and third rolls. The AI has no option of that, it just rolls.
--------------------------------------------------------
-Player, AI and cards/card values need to be assigned with an array or object literate.
-Connect values with cards.
-Assign onclick button to loop through the three arrays and randomly choose 3 values.
-A for loop should work wonders in this case.
-Make those values appear in the html with txt and possibly string interpolation.
-When the player wants to fix a value a class of 'fixed' will be added to the column they want to fix.
-Clicking the button again removes the fixed class.
-If the column has a class of fixed && the player has rolls left they will be able to roll again.
-Not sure at this point how to restrict the player and AI to having 3 rolls each. Maybe a conditional statement?
-Render the roll and fix buttons inactive and remove 'fixed' class from columns when AI is rolling.
-If the player has rolled 3 times then it's the AI's turn.
-Then the score is calculated and a winner is decided.
-If player 1 score = 21 && > AI score then P1 wins, else if AI score = 21 && > P1 score, AI wins.
-else if player 1 score > 21 return loss.
+
+Introduction
+
+Welcome to Slot Jack, a simplified version of Blackjack and my first project at General Assembly's WDI course!
+
+[URL=http://s122.photobucket.com/user/booncifer/media/empty%20deck.png.html][IMG]http://i122.photobucket.com/albums/o278/booncifer/empty%20deck.png[/IMG][/URL]
+
+ Blackjack (or 21) is a game first mentioned by Miguel de Cervantes in the 17th century. The rules are as follows: You got 3 cards. Each card is worth its respective value e.g. a 7 is worth 7 points. Kings, Queens and Jacks are worth 10 points. Aces are either worth 11 or 1 point depending on your hand.You have 3 rolls to gather 21 points or less. Do not exceed 21 points or you will go bust and lose!You are able to hold on to or 'fix' a card if you believe it will benefit you on your next roll.You have a pot of 100 dollars, don't deplete it if you don't want to owe to the dealer.
+
+ [URL=http://s122.photobucket.com/user/booncifer/media/controls.png.html][IMG]http://i122.photobucket.com/albums/o278/booncifer/controls.png[/IMG][/URL]
+
+This game was an ambitious idea for a first project but I would like to believe that with the help of my precious instructors and fellow students I have managed to overcome a challenge which seemed to me at the time unreachable.
+
+Project Brief
+
+Create a game using everything we've learned in the first 2 weeks of the WDI course.
+Make it object oriented if possible.
+
+Made with:
+
+Stress
+
+HTML,CSS, Javascript and jQuery
+
+Stress
+
+Google Fonts
+
+A terrible sense of humour
+
+What can be improved
+
+A lot of things for sure!
+
+First of all the code could be a lot cleaner and refactored. Definitely something to work on in the future.
+
+Other than that I would like the styling of the main logo to be a little bit different and potentially animated.
+
+Talking about animations I wanted to add a few more animations when the player wins or loses but I was not happy with just implementing gifs or images for that.
+
+The game currently is not responsive at all but I would like to at least attempt a responsive solution for it which would also be user friendly. Accessibility is also something to be considered.
+
+
+
+Credits
+
+All of the images are a result of frantic Google-ing and I am fairly positive that they are free to use.
+All sounds were found on https://www.freesound.org/ and were tweeked in Audacity
+
+All this would not have been possible without the immense help of GA instructors Alex Chin and Rane Gowan and TAs Ed Compton and Natalie Huitson.

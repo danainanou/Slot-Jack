@@ -2,33 +2,39 @@ var sj = sj || {};
 
 sj.values      = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 sj.suits       = ['hearts', 'diamonds', 'spades', 'clubs'];
-// const deck        = makeDeck();
-let numberOfRolls = 3;
-let $cards;
-let $cardsToRoll;
-let $rolls;
-let $playerScore;
-let $dealerScore;
-let $message;
-let $rollButton;
-let $fixButtons;
-
-// $(init);
+sj.numberOfRolls = 3;
+sj.$cards;
+sj.$cardsToRoll;
+sj.$rolls;
+sj.$playerScore;
+sj.$dealerScore;
+sj.$message;
+sj.$rollButton;
+sj.$fixButtons;
+sj.leftInPot = 100;
+sj.$playerPot;
+sj.$howToButton;
+sj.roll;
 
 sj.init = function init() {
-  $rolls       = $('.rolls');
-  $cards       = $('.card');
-  $playerScore = $('.playerScore');
-  $dealerScore = $('.dealerScore');
-  $message     = $('.message');
-  $rollButton  = $('.roll');
-  $fixButtons  = $('.fix');
-  $rollButton.on('click', sj.roll);
-  $fixButtons.on('click', sj.fix);
+  sj.$rolls       = $('.rolls');
+  sj.$cards       = $('.card');
+  sj.$playerScore = $('.playerScore');
+  sj.$dealerScore = $('.dealerScore');
+  sj.$playerPot   = $('.playerPot');
+  sj.$message     = $('.message');
+  sj.$rollButton  = $('.roll');
+  sj.$fixButtons  = $('.fix');
+  sj.$howToButton = $('.how-to');
+  sj.$rollButton.on('click', sj.roll);
+  sj.$fixButtons.on('click', sj.fix);
+  sj.$howToButton.on('click', sj.howToSJ);
 };
 
-sj.deck = function makeDeck() {
+sj.makeDeck = function() {
+  // Create an empty array
   const deck = [];
+  //
   for (let i = 0; i < sj.values.length; i++) {
     for (let j = 0; j < sj.suits.length; j++) {
       deck.push(`${sj.values[i]}_of_${sj.suits[j]}`);
@@ -37,39 +43,23 @@ sj.deck = function makeDeck() {
   return deck;
 };
 
-sj.reset = function reset() {
-  $rollButton.hide();
-  $fixButtons.hide();
-
-  setTimeout(() => {
-    numberOfRolls = 3;
-    $playerScore.text('0');
-    $dealerScore.text('0');
-    $rolls.text(numberOfRolls);
-    $message.html('<h2>Start playing!</h2>');
-    $cards
-    .removeClass('fixed')
-    .css('background-image', 'none')
-    .attr('data-image', '');
-
-    $rollButton.show();
-    $fixButtons.show();
-  }, 5000);
-};
+sj.deck = sj.makeDeck();
 
 sj.roll = function roll() {
-  $cardsToRoll = $('.card:not(.fixed)');
-  for (let i = 0; i < $cardsToRoll.length; i++) {
+  sj.$cardsToRoll = $('.card:not(.fixed)');
+  for (let i = 0; i < sj.$cardsToRoll.length; i++) {
     const cardAnimationInterval = setInterval(() => {
       const random = sj.deck[Math.floor(Math.random() * sj.deck.length)];
-      const $card = $($cardsToRoll[i]);
+      const $card = $(sj.$cardsToRoll[i]);
       $card.css('background-image', `url('images/${random}.png')`);
+      var audio = new Audio('./sounds/shuffle.wav');
+      audio.play();
     }, 50);
 
     setTimeout(() => {
       clearInterval(cardAnimationInterval);
       const random = sj.deck[Math.floor(Math.random() * sj.deck.length)];
-      const $card = $($cardsToRoll[i]);
+      const $card = $(sj.$cardsToRoll[i]);
       $card.attr('data-image', random);
       $card.css('background-image', `url('images/${random}.png')`);
     }, 1000);
@@ -77,28 +67,69 @@ sj.roll = function roll() {
 
   setTimeout(() => {
     const score = sj.calculateScore();
-    if (numberOfRolls === 0) {
-      $dealerScore.text(score);
+    if (sj.numberOfRolls === 0) {
+      sj.$dealerScore.text(score);
       sj.calculateWinner();
     } else {
-      $playerScore.text(score);
+      sj.$playerScore.text(score);
       sj.counter();
     }
   }, 1100);
 };
 
+
+
+sj.popUp = function popUp(hideOrshow) {
+  if (hideOrshow === 'hide') document.getElementById('ac-wrapper').style.display = 'none';
+  else document.getElementById('ac-wrapper').removeAttribute('style');
+};
+window.onload = function() {
+  setTimeout(function() {
+    sj.popUp('show');
+  }, 1000);
+};
+
+sj.howToSJ = function howToSJ(hideOrshow) {
+  if (hideOrshow === 'hide') document.getElementById('howtoplay').style.display = 'none';
+  else document.getElementById('howtoplay').removeAttribute('style');
+  var audio = new Audio('./sounds/howtopopup.wav');
+  audio.play();
+};
+
+sj.reset = function reset() {
+  sj.$rollButton.hide();
+  sj.$fixButtons.hide();
+
+  setTimeout(() => {
+    sj.numberOfRolls = 3;
+    sj.$playerScore.text('0');
+    sj.$dealerScore.text('0');
+    sj.$rolls.text(sj.numberOfRolls);
+    sj.$message.html('<h2>Start playing!</h2>');
+    sj.$cards
+    .removeClass('fixed')
+    .css('background-image', 'none')
+    .attr('data-image', '');
+
+    sj.$rollButton.show();
+    sj.$fixButtons.show();
+  }, 5000);
+};
+
 sj.fix = function fix() {
   const $card = $(`.${$(this).data('card')}`);
   $card.toggleClass('fixed');
+  var audio = new Audio('./sounds/fix.wav');
+  audio.play();
 };
 
 sj.ai = function ai() {
-  $rollButton.hide();
-  $fixButtons.hide();
-  $message.html(`<h2>You got ${$playerScore.text()}. Dealer is dealing...</h2>`);
+  sj.$rollButton.hide();
+  sj.$fixButtons.hide();
+  sj.$message.html(`<h2>You got ${sj.$playerScore.text()}. Dealer is dealing...</h2>`);
 
   setTimeout(() => {
-    $cards
+    sj.$cards
     .removeClass('fixed')
     .css('background-image', 'none')
     .attr('data-image', '');
@@ -107,18 +138,19 @@ sj.ai = function ai() {
   }, 3000);
 };
 
+
 sj.counter = function counter() {
-  numberOfRolls--;
-  $rolls.text(numberOfRolls);
-  if (numberOfRolls === 0) {
+  sj.numberOfRolls--;
+  sj.$rolls.text(sj.numberOfRolls);
+  if (sj.numberOfRolls === 0) {
     sj.ai();
   }
 };
 
 sj.calculateScore = function calculateScore() {
   let score = 0;
-  for (let i = 0; i < $cards.length; i++) {
-    const image = $($cards[i]).attr('data-image');
+  for (let i = 0; i < sj.$cards.length; i++) {
+    const image = $(sj.$cards[i]).attr('data-image');
     const value = parseInt(image);
     if (isNaN(value)) {
       const name = image.split('_')[0];
@@ -148,16 +180,26 @@ sj.calculateScore = function calculateScore() {
 };
 
 sj.calculateWinner = function calculateWinner() {
-  if ($playerScore.text() > 21) {
-    $message.html('<h2>You\'re bust! House wins!</h2>');
-  } else if ($dealerScore.text() > 21) {
-    $message.html('<h2>Dealer is bust! Player wins!</h2>');
-  } else if ($dealerScore.text() >= $playerScore.text()) {
-    $message.html('<h2>House wins!</h2>');
+  if (sj.$playerScore.text() > 21) {
+    sj.leftInPot = sj.leftInPot-10;
+    sj.$playerPot.text(sj.leftInPot);
+    sj.$message.html('<h2>You\'re bust! House wins!</h2>');
+  } else if (sj.$dealerScore.text() > 21) {
+    sj.leftInPot = sj.leftInPot+10;
+    sj.$playerPot.text(sj.leftInPot);
+    sj.$message.html('<h2>Dealer is bust! Player wins!</h2>');
+  } else if (sj.$dealerScore.text() > sj.$playerScore.text()) {
+    sj.leftInPot = sj.leftInPot-10;
+    sj.$playerPot.text(sj.leftInPot);
+    sj.$message.html('<h2>House wins!</h2>');
   } else {
-    $message.html('<h2>Player wins!</h2>');
+    sj.leftInPot = sj.leftInPot+10;
+    sj.$playerPot.text(sj.leftInPot);
+    sj.$message.html('<h2>Player wins!</h2>');
   }
   sj.reset();
 };
+
+
 
 $(sj.init.bind(sj));

@@ -12,6 +12,7 @@ let $playerPot;
 let $message;
 let $rollButton;
 let $fixButtons;
+let $howToButton;
 
 // Function to run when the document has loaded
 $(init);
@@ -27,21 +28,28 @@ function init() {
   $message     = $('.message');
   $rollButton  = $('.roll');
   $fixButtons  = $('.fix');
+  $howToButton = $('.how-to');
 
   // Setup event listeners
   $rollButton.on('click', roll);
   $fixButtons.on('click', fix);
+  $howToButton.on('click', howToSJ);
 }
 
-function PopUp(hideOrshow) {
+function popUp(hideOrshow) {
   if (hideOrshow === 'hide') document.getElementById('ac-wrapper').style.display = 'none';
   else document.getElementById('ac-wrapper').removeAttribute('style');
 }
 window.onload = function() {
   setTimeout(function() {
-    PopUp('show');
+    popUp('show');
   }, 1000);
 };
+
+function howToSJ(hideOrshow) {
+  if (hideOrshow === 'hide') document.getElementById('howtoplay').style.display = 'none';
+  else document.getElementById('howtoplay').removeAttribute('style');
+}
 
 
 function reset() {

@@ -16,8 +16,8 @@
       <h2>Welcome to Slot Jack!</h2>
       <img src="images/td.gif" alt="Tenacious D Gif">
       <p>This is not the greatest game in the world, this is just a tribute...</p>
-      <h3>Want to know how to play? Click the "How to Play" button below!</h3>
-      <input type="submit" class="submit" value="Cool, let's play!" onclick="PopUp('hide')" />
+      <h3>Want to know how to play? Click the "How to Play" button!</h3>
+      <input type="submit" class="submit" value="Cool, let's play!" onclick="popUp('hide')" />
     </div>
   </div>
   <div class="container">
@@ -32,7 +32,7 @@
         Dealer Score <span class="dealerScore">0</span>
       </div>
       <div class="pot">
-        Player Pot <span class="playerPot">100</span>
+        Player Pot  $ <span class="playerPot">100</span>
       </div>
       <div class="message">
         <h2>Start playing!</h2>
@@ -50,5 +50,27 @@
     </div>
     <div class="roll">Roll</div>
   </div>
-</body>
-</html>
+  <div class="how-to">How To Play Slot Jack</div>
+  <div id="howtoplay" style="display:none">
+    <div id="popup-two">
+      <h2>You! Let's play Slot Jack!</h2>
+      <img src="images/lemmy.jpg" alt="Lemmy">
+      <p>If you've played Black Jack before this is just a variation of the game.
+        Let's refresh your memory.</p>
+        <ul>
+          <li>You got 3 cards. Each card is worth its respective value e.g.
+            a 7 is worth 7 points. Kings, Queens and Jacks are worth 10 points.
+            Aces are either worth 11 or 1 point depending on your hand. </li>
+            <li>You have 3 rolls to gather 21 points or less. Do not exceed 21
+              points or you will go bust and lose!</li>
+              <li>You are able to hold on to or 'fix' a card if you believe it will
+                benefit you on your next roll.</li>
+                <li>You have a pot of 100 dollars, do not deplete it!</li>
+              </ul>
+              <p>Like all things in life, it's better to experience it so...</p>
+              <h3>Let's get this show on the road!</h3>
+              <input type="submit" class="submit" value="I am ready!" onclick="howToSJ('hide')" />
+            </div>
+          </div>
+        </body>
+        </html>

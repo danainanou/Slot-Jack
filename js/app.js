@@ -49,6 +49,8 @@ window.onload = function() {
 function howToSJ(hideOrshow) {
   if (hideOrshow === 'hide') document.getElementById('howtoplay').style.display = 'none';
   else document.getElementById('howtoplay').removeAttribute('style');
+  var audio = new Audio('./sounds/howtopopup.wav');
+  audio.play();
 }
 
 
@@ -85,6 +87,8 @@ function roll() {
       const random = deck[Math.floor(Math.random() * deck.length)];
       const $card = $($cardsToRoll[i]);
       $card.css('background-image', `url('images/${random}.png')`);
+      var audio = new Audio('./sounds/shuffle.wav');
+      audio.play();
     }, 50);
 
     // Create a setTimeout to run after 1 second
@@ -129,6 +133,8 @@ function fix() {
   const $card = $(`.${$(this).data('card')}`);
   // Toggle (switch) the class of fixed on and off
   $card.toggleClass('fixed');
+  var audio = new Audio('./sounds/fix.wav');
+  audio.play();
 }
 
 function ai() {

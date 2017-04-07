@@ -2,13 +2,14 @@
 
 Introduction
 
-Welcome to Slot Jack, a simplified version of Blackjack and my first project at General Assembly's WDI course!
+Welcome to Slot Jack, a simplified version of Blackjack and my first project at General Assembly!
 
-[URL=http://s122.photobucket.com/user/booncifer/media/empty%20deck.png.html][IMG]http://i122.photobucket.com/albums/o278/booncifer/empty%20deck.png[/IMG][/URL]
+![empty deck](https://cloud.githubusercontent.com/assets/22467291/24795129/27f647b6-1b80-11e7-8b48-97df741ae276.png)
 
  Blackjack (or 21) is a game first mentioned by Miguel de Cervantes in the 17th century. The rules are as follows: You got 3 cards. Each card is worth its respective value e.g. a 7 is worth 7 points. Kings, Queens and Jacks are worth 10 points. Aces are either worth 11 or 1 point depending on your hand.You have 3 rolls to gather 21 points or less. Do not exceed 21 points or you will go bust and lose!You are able to hold on to or 'fix' a card if you believe it will benefit you on your next roll.You have a pot of 100 dollars, don't deplete it if you don't want to owe to the dealer.
+ 
+ ![controls](https://cloud.githubusercontent.com/assets/22467291/24795134/2c282020-1b80-11e7-9594-d3ee82fe7540.png)
 
- [URL=http://s122.photobucket.com/user/booncifer/media/controls.png.html][IMG]http://i122.photobucket.com/albums/o278/booncifer/controls.png[/IMG][/URL]
 
 This game was an ambitious idea for a first project but I would like to believe that with the help of my precious instructors and fellow students I have managed to overcome a challenge which seemed to me at the time unreachable.
 
@@ -31,7 +32,7 @@ A terrible sense of humour
 
 What can be improved
 
-A lot of things for sure!
+A lot of things for sure! 
 
 First of all the code could be a lot cleaner and refactored. Definitely something to work on in the future.
 

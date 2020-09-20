@@ -1,4 +1,4 @@
-
+Disclaimer: I do not promote or endorse gambling in any way. This was made solely as a project for the GA WDI program. If you or someone you know experience issues with gambling please visit https://www.begambleaware.org/
 
 Introduction
 
